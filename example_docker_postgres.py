@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     # Recognize audio from a file
     b = time()
-    results = djv.recognize(FileRecognizer, "mp3/tanda_3.mp3")
+    results = djv.recognize(FileRecognizer, "mp3/tanda_4.mp3")
     print(f'Tiempo de identificacion: {time() - b} seg')
 
     return_vector = [[x, 0] for x in os.listdir('test')]
