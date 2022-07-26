@@ -29,17 +29,22 @@ if __name__ == '__main__':
     a = time()
 
     ### PARA HACER HUELLAS DE LAS TANDAS, SOLO UNA VEZ
-
+    directorio_inicial = os.getcwd()
     directorio_tandas = "test"
+    os.chdir(os.path.join(os.getcwd(), directorio_tandas))
 
-    for filename in os.listdir(directorio_tandas):
-        audiofile = AudioSegment.from_file(os.path.join(directorio_tandas, filename))
+    for filename in os.listdir(os.getcwd()):
+        if filename == ".DS_Store":
+            continue
+        print(filename)
+        audiofile = AudioSegment.from_file(filename)
 
         quality = 44100 / (2 * audiofile.frame_rate)
         audiofile = audiofile.set_frame_rate(int(audiofile.frame_rate * quality))
 
-        audiofile.export(os.path.join(directorio_tandas, filename), format="mp3")
+        audiofile.export(filename, format="mp3")
 
+    os.chdir(directorio_inicial)
     djv.fingerprint_directory(directorio_tandas, [".mp3"])
 
     ##############################################
